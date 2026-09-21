@@ -1,0 +1,38 @@
+{
+  "image": "bear.jpg",
+  "prompt": "Describe this image in one sentence.",
+  "generation_length": 32,
+  "steps": 32,
+  "dtype": "float16",
+  "attention": "sdpa",
+  "seed": 0,
+  "gpu": "NVIDIA H200",
+  "flops_scope": "dense decoder and executed LM-head matmuls; 2 FLOPs/MAC; excludes vision encoder/projector and elementwise ops",
+  "results": {
+    "baseline": {
+      "full_forwards": 32,
+      "text_only_forwards": 0,
+      "decoder_flops": 1811858797363200,
+      "lm_head_flops": 118442956947456,
+      "total_flops": 1930301754310656,
+      "tflops": 1930.301754310656,
+      "text": "The image depicts a close-up of a brown bear's face, showcasing its thick fur, prominent nose, and expressive eyes, set against a grassy background.",
+      "output_tokens": 31,
+      "seconds": 11.368,
+      "peak_memory_gib": 27.901
+    },
+    "lown": {
+      "full_forwards": 13,
+      "text_only_forwards": 20,
+      "decoder_flops": 762121405071360,
+      "lm_head_flops": 1093013864448,
+      "total_flops": 763214418935808,
+      "tflops": 763.214418935808,
+      "text": "The image depicts a close-up of a brown bear with a black nose, dark eyes, and a thick, dense fur, set against a grassy background.",
+      "output_tokens": 31,
+      "seconds": 3.938,
+      "peak_memory_gib": 16.563
+    }
+  },
+  "lown_flops_ratio": 0.3953860670910311
+}

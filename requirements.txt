@@ -1,0 +1,9 @@
+torch==2.6.0
+transformers==4.39.3
+tokenizers==0.15.2
+accelerate==0.29.1
+huggingface-hub==0.22.2
+numpy==1.26.4
+Pillow>=10.0,<13
+safetensors>=0.4.3,<1
+requests>=2.31,<3
