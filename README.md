@@ -48,3 +48,14 @@ FLOPs are analytical estimates from executed decoder and LM-head shapes (2 FLOPs
 
 Source: [LLaDA-V](https://github.com/ML-GSAI/LLaDA-V) ([license](llava/LICENSE)); reference: [D3ToM](https://github.com/bcmi/D3ToM-Diffusion-MLLM).
 Image: “Brown Bear II” by [Derek John Lee](https://www.flickr.com/photos/derek-john-lee/9138147604/), MS COCO image 285, [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) as recorded in COCO metadata.
+
+## Citation
+
+```bibtex
+@article{cho2026lown,
+  title   = {Look Only When Needed: Certificate-Guided Visual Routing for Efficient Diffusion VLMs},
+  author  = {Cho, Donghyeon and Kim, Joowon and Shin, Seungho and Yang, Eunho},
+  journal = {arXiv preprint},
+  year    = {2026}
+}
+```
