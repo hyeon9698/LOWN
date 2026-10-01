@@ -25,7 +25,9 @@ def _predict(model, embeddings, length, position_ids=None):
     hidden = model.get_model()(
         inputs_embeds=embeddings, position_ids=position_ids, use_cache=False,
     )[0]
-    logits = model.lm_head(hidden[:, -length:]).float()[0]
+    # Project every position and then keep the response, as the evaluated implementation
+    # does; projecting only the response changes fp16 rounding and can flip near-ties.
+    logits = model.lm_head(hidden).float()[0, -length:]
     logits[:, list(SUPPRESS_TOKEN_IDS)] = -torch.inf
     tokens = logits.argmax(dim=-1)
     scores = logits.double().softmax(dim=-1).gather(1, tokens[:, None])[:, 0]

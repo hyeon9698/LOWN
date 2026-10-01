@@ -7,7 +7,7 @@
   "attention": "sdpa",
   "seed": 0,
   "gpu": "NVIDIA H200",
-  "flops_scope": "dense decoder and executed LM-head matmuls; 2 FLOPs/MAC; excludes vision encoder/projector and elementwise ops",
+  "flops_scope": "decoder and LM-head matmuls over all input tokens of every forward (the paper's C(n)); 2 FLOPs/MAC; excludes vision encoder/projector and elementwise ops",
   "results": {
     "baseline": {
       "full_forwards": 32,
@@ -18,21 +18,21 @@
       "tflops": 1930.301754310656,
       "text": "The image depicts a close-up of a brown bear's face, showcasing its thick fur, prominent nose, and expressive eyes, set against a grassy background.",
       "output_tokens": 31,
-      "seconds": 11.368,
+      "seconds": 7.001,
       "peak_memory_gib": 27.901
     },
     "lown": {
       "full_forwards": 13,
       "text_only_forwards": 20,
       "decoder_flops": 762121405071360,
-      "lm_head_flops": 1093013864448,
-      "total_flops": 763214418935808,
-      "tflops": 763.214418935808,
+      "lm_head_flops": 50042646134784,
+      "total_flops": 812164051206144,
+      "tflops": 812.164051206144,
       "text": "The image depicts a close-up of a brown bear with a black nose, dark eyes, and a thick, dense fur, set against a grassy background.",
       "output_tokens": 31,
-      "seconds": 3.938,
-      "peak_memory_gib": 16.563
+      "seconds": 2.97,
+      "peak_memory_gib": 18.614
     }
   },
-  "lown_flops_ratio": 0.3953860670910311
+  "lown_flops_ratio": 0.42074460606610276
 }

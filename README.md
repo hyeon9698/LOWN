@@ -41,10 +41,10 @@ Prompt: **Describe this image in one sentence.**
 | Method | TFLOPs | Relative FLOPs |
 | --- | ---: | ---: |
 | LLaDA-V | 1930.30 | 1.000 |
-| LOWN | 763.21 | 0.395 |
+| LOWN | 812.16 | 0.421 |
 
 Actual outputs from one NVIDIA H200, FP16, SDPA, 32 tokens and 32 steps; [full result](assets/bear.json).
-FLOPs are analytical estimates from executed decoder and LM-head shapes (2 FLOPs per multiply-add), excluding vision encoding, projection, and elementwise operations. LOWN projects only response tokens through the LM head. This is a single-image example.
+FLOPs are analytical estimates from executed decoder and LM-head shapes (2 FLOPs per multiply-add), excluding vision encoding, projection, and elementwise operations. This is a single-image example.
 
 Source: [LLaDA-V](https://github.com/ML-GSAI/LLaDA-V) ([license](llava/LICENSE)); reference: [D3ToM](https://github.com/bcmi/D3ToM-Diffusion-MLLM).
 Image: “Brown Bear II” by [Derek John Lee](https://www.flickr.com/photos/derek-john-lee/9138147604/), MS COCO image 285, [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) as recorded in COCO metadata.

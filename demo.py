@@ -72,6 +72,8 @@ def parse_args(argv=None):
     parser.add_argument("--prompt", default="Describe this image in one sentence.")
     parser.add_argument("--method", choices=("both", "baseline", "lown"), default="both")
     parser.add_argument("--model", default="GSAI-ML/LLaDA-V")
+    parser.add_argument("--revision", default="a10ba1790083e10e07cfcab6e7be93e1823f5792",
+                        help="LLaDA-V checkpoint revision used in the paper")
     parser.add_argument("--length", type=int, default=32)
     parser.add_argument("--steps", type=int, default=32)
     parser.add_argument("--output", default="outputs/result.json")
@@ -83,16 +85,16 @@ def parse_args(argv=None):
     return args
 
 
-def load_model(checkpoint):
+def load_model(checkpoint, revision=None):
     import torch
     from transformers import AutoTokenizer
     from llava.model.language_model.llava_llada import LlavaLLaDAConfig, LlavaLLaDAModelLM
 
-    tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-    config = LlavaLLaDAConfig.from_pretrained(checkpoint)
+    tokenizer = AutoTokenizer.from_pretrained(checkpoint, revision=revision)
+    config = LlavaLLaDAConfig.from_pretrained(checkpoint, revision=revision)
     config.use_cache = False
     model = LlavaLLaDAModelLM.from_pretrained(
-        checkpoint, config=config, torch_dtype=torch.float16,
+        checkpoint, revision=revision, config=config, torch_dtype=torch.float16,
         device_map="cuda:0", low_cpu_mem_usage=True, attn_implementation="sdpa",
     ).eval()
     model.resize_token_embeddings(len(tokenizer))
@@ -126,7 +128,7 @@ def prepare_inputs(tokenizer, model, processor, image, question):
 def main():
     import torch
     from PIL import Image
-    from lown import apply_lown
+    from lown import MASK_ID, apply_lown
 
     args = parse_args()
     if not torch.cuda.is_available():
@@ -135,7 +137,7 @@ def main():
         raise SystemExit(f"Image not found: {args.image}")
     torch.manual_seed(0)
     image = Image.open(args.image).convert("RGB")
-    tokenizer, model, processor = load_model(args.model)
+    tokenizer, model, processor = load_model(args.model, args.revision)
     inputs = prepare_inputs(tokenizer, model, processor, image, args.prompt)
     methods = ("baseline", "lown") if args.method == "both" else (args.method,)
     result = {
@@ -147,7 +149,7 @@ def main():
         "attention": "sdpa",
         "seed": 0,
         "gpu": torch.cuda.get_device_name(0),
-        "flops_scope": "dense decoder and executed LM-head matmuls; 2 FLOPs/MAC; excludes vision encoder/projector and elementwise ops",
+        "flops_scope": "decoder and LM-head matmuls over all input tokens of every forward (the paper's C(n)); 2 FLOPs/MAC; excludes vision encoder/projector and elementwise ops",
         "results": {},
     }
     for method in methods:
@@ -163,7 +165,7 @@ def main():
             )
         torch.cuda.synchronize()
         seconds = time.perf_counter() - started
-        if bool(tokens.eq(126336).any()):
+        if bool(tokens.eq(MASK_ID).any()):
             raise RuntimeError(f"{method} returned an unresolved MASK token")
         text = tokenizer.batch_decode(tokens, skip_special_tokens=True)[0].strip()
         measured = counter.result()
