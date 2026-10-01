@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="LOWN is a training-free decoding method for diffusion VLMs that processes the image only when a text-only prediction disagrees with the last image-conditioned prediction.">
+  <meta name="keywords" content="LOWN, diffusion vision-language model, efficient decoding, LLaDA-V">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Look Only When Needed (LOWN)</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <style>
+    .title-sub { display: inline-block; margin-top: 0.4rem; font-size: 1.9rem; }
+    .result-figure { margin: 0 auto 0.75rem; }
+    .author-note { font-size: 0.8rem; color: #777; margin-top: 0.3rem; }
+    @media screen and (max-width: 768px) {
+      .publication-title { font-size: 1.8rem !important; }
+      .title-sub { font-size: 1.35rem; }
+    }
+  </style>
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">
+            Look Only When Needed:<br>
+            <span class="title-sub">Certificate&#8209;Guided Visual Routing for Efficient Diffusion VLMs</span>
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Donghyeon Cho<sup>1*</sup>,</span>
+            <span class="author-block">Joowon Kim<sup>1*</sup>,</span>
+            <span class="author-block">Seungho Shin<sup>1</sup>,</span>
+            <span class="author-block">Eunho Yang<sup>1,2&dagger;</sup></span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>KAIST,</span>
+            <span class="author-block"><sup>2</sup>AITRICS</span>
+          </div>
+          <div class="publication-authors author-note">
+            <span class="author-block"><sup>*</sup>Equal contribution</span>
+            <span class="author-block"><sup>&dagger;</sup>Corresponding author</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark" disabled>
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv (coming soon)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/hyeon9698/LOWN"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/teaser.png"
+           alt="LOWN compared with token pruning, the token budget, and the relative cost and performance on ten benchmarks.">
+      <h2 class="subtitle has-text-centered">
+        Token pruning reduces the visual tokens processed during decoding, whereas LOWN decides at each
+        step whether the visual tokens need to be processed at all and otherwise runs a TEXT-ONLY forward.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Diffusion vision-language models (DVLMs) process their entire input at every denoising step. Since visual tokens make up 89&ndash;97% of this input on the benchmarks we study, most of the decoding computation is spent repeatedly processing the same image. Visual token pruning methods partially relieve this burden by removing part of the visual tokens, but they lose the removed information and still process the remaining image at every step. To measure how often the image is actually needed, we compare LLaDA-V's predictions with and without the image at every decoding step and find that removing the image changes a token being unmasked at only 22.8% of steps on average and at as few as 7.9%. We therefore propose LOWN, a decoding method that decides at every step whether to process the image and how many tokens to unmask. LOWN predicts the masked tokens without the image and processes the image only when this prediction disagrees with the last image-conditioned prediction. Agreement certifies the earlier prediction for reuse, and the number of certified tokens sets how many are unmasked in that step. We further observe that the need for the image differs across benchmarks, so LOWN's adaptive decision is needed rather than a fixed schedule. Without training or a tuned threshold, LOWN retains 99.6% of LLaDA-V's score on ten benchmarks at 35.3% of the decoding FLOPs on average. LOWN also generalizes across LLaDA-based DVLMs, composes orthogonally with visual token pruning, and runs under key-value caching for further efficiency gains.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Results</h2>
+    <img class="result-figure" src="./static/images/table1.png"
+         alt="Table 1: scores and relative FLOPs of LLaDA-V, RedVTP, ZOO-Prune, KLASS and LOWN on ten benchmarks.">
+    <div class="content has-text-justified">
+      <p>
+        <b>Table 1. Performance at matched decoding FLOPs on LLaDA-V.</b> The upper block compares standalone
+        methods at LOWN's budget, and the lower block at the budget of LOWN with RedVTP (r=50%). Competitors run
+        on a discrete hyperparameter grid, so each cell uses the cheapest setting with at least LOWN's FLOPs.
+        Cells show scores with FLOPs relative to LLaDA-V below. Best scores are bold, second best underlined,
+        and lowest FLOPs bold.
+      </p>
+    </div>
+    <br>
+    <img class="result-figure" src="./static/images/figure4.png"
+         alt="Figure 4: score against relative FLOPs on ten benchmarks for LOWN, RedVTP, ZOO-Prune, KLASS and their compositions.">
+    <div class="content has-text-justified">
+      <p>
+        <b>Figure 4. Performance and efficiency on LLaDA-V.</b> Gray dashed lines denote the baseline. Triangles
+        and squares denote RedVTP and ZOO-Prune retention settings, respectively. Arrows connect each
+        fixed-pruning setting to its composition with LOWN. KLASS is matched to LOWN's FLOPs.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            This website is licensed under a <a rel="license"
+            href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0
+            International License</a>. It is adapted from the <a
+            href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
