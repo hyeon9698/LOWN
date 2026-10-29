@@ -3,10 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="LOWN is a training-free decoding method for diffusion VLMs that processes the image only when a text-only prediction disagrees with the last image-conditioned prediction.">
+        content="LOWN (Look Only When Needed) is a training-free decoding method for diffusion VLMs that processes the image only when a text-only prediction disagrees with the last image-conditioned prediction.">
   <meta name="keywords" content="LOWN, diffusion vision-language model, efficient decoding, LLaDA-V">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Look Only When Needed (LOWN)</title>
+  <title>LOWN: Look Only When Needed | Certificate-Guided Visual Routing for Efficient Diffusion VLMs</title>
+  <link rel="canonical" href="https://hyeon9698.github.io/LOWN/">
+  <link rel="describedby" href="https://hyeon9698.github.io/LOWN/llms.txt">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hyeon9698.github.io/LOWN/">
+  <meta property="og:title" content="LOWN: Look Only When Needed | Certificate-Guided Visual Routing for Efficient Diffusion VLMs">
+  <meta property="og:description"
+        content="LOWN (Look Only When Needed) is a training-free decoding method for diffusion VLMs that processes the image only when a text-only prediction disagrees with the last image-conditioned prediction.">
+  <meta property="og:image" content="https://hyeon9698.github.io/LOWN/static/images/teaser.png">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -19,6 +29,7 @@
     .title-sub { display: inline-block; margin-top: 0.4rem; font-size: 1.9rem; }
     .result-figure { margin: 0 auto 0.75rem; }
     .author-note { font-size: 0.8rem; color: #777; margin-top: 0.3rem; }
+    .nowrap { white-space: nowrap; }
     @media screen and (max-width: 768px) {
       .publication-title { font-size: 1.8rem !important; }
       .title-sub { font-size: 1.35rem; }
@@ -36,7 +47,7 @@
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title">
             Look Only When Needed:<br>
-            <span class="title-sub">Certificate&#8209;Guided Visual Routing for Efficient Diffusion VLMs</span>
+            <span class="title-sub"><span class="nowrap">Certificate-Guided</span> Visual Routing for Efficient Diffusion VLMs</span>
           </h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">Donghyeon Cho<sup>1*</sup>,</span>
@@ -56,11 +67,21 @@
           <div class="column has-text-centered">
             <div class="publication-links">
               <span class="link-block">
-                <a class="external-link button is-normal is-rounded is-dark" disabled>
+                <a href="https://arxiv.org/pdf/2610.36671"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2610.36671"
+                   class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
                   </span>
-                  <span>arXiv (coming soon)</span>
+                  <span>arXiv</span>
                 </a>
               </span>
               <span class="link-block">
@@ -141,7 +162,7 @@
     <pre><code>@article{cho2026lown,
   title   = {Look Only When Needed: Certificate-Guided Visual Routing for Efficient Diffusion VLMs},
   author  = {Cho, Donghyeon and Kim, Joowon and Shin, Seungho and Yang, Eunho},
-  journal = {arXiv preprint},
+  journal = {arXiv preprint arXiv:2610.36671},
   year    = {2026}
 }</code></pre>
   </div>

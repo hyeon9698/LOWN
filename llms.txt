@@ -1,0 +1,35 @@
+# LOWN: Look Only When Needed
+
+> LOWN (Look Only When Needed) is a training-free decoding method for diffusion vision-language models (DVLMs). It predicts the masked tokens without the image and processes the image only when this prediction disagrees with the last image-conditioned prediction. Paper: "Look Only When Needed: Certificate-Guided Visual Routing for Efficient Diffusion VLMs" (arXiv:2610.36671).
+
+Authors: Donghyeon Cho (KAIST)*, Joowon Kim (KAIST)*, Seungho Shin (KAIST), Eunho Yang (KAIST, AITRICS)†. *Equal contribution, †Corresponding author.
+
+From the abstract:
+
+- Visual tokens make up 89-97% of LLaDA-V's input on the benchmarks studied, so most of the decoding computation is spent repeatedly processing the same image.
+- Removing the image changes a token being unmasked at only 22.8% of decoding steps on average and at as few as 7.9%.
+- Agreement certifies the earlier prediction for reuse, and the number of certified tokens sets how many are unmasked in that step.
+- Without training or a tuned threshold, LOWN retains 99.6% of LLaDA-V's score on ten benchmarks at 35.3% of the decoding FLOPs on average.
+- LOWN also generalizes across LLaDA-based DVLMs, composes orthogonally with visual token pruning, and runs under key-value caching for further efficiency gains.
+
+Citation:
+
+```bibtex
+@article{cho2026lown,
+  title   = {Look Only When Needed: Certificate-Guided Visual Routing for Efficient Diffusion VLMs},
+  author  = {Cho, Donghyeon and Kim, Joowon and Shin, Seungho and Yang, Eunho},
+  journal = {arXiv preprint arXiv:2610.36671},
+  year    = {2026}
+}
+```
+
+## Paper
+
+- [arXiv abstract](https://arxiv.org/abs/2610.36671): title, authors and abstract
+- [PDF](https://arxiv.org/pdf/2610.36671): full paper
+- [HTML](https://arxiv.org/html/2610.36671): full paper with tables as text
+
+## Code
+
+- [GitHub: hyeon9698/LOWN](https://github.com/hyeon9698/LOWN): LOWN decoding on LLaDA-V and a demo that compares it with the baseline on one image
+- [Project page](https://hyeon9698.github.io/LOWN/): overview, figures and results
