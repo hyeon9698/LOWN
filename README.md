@@ -1,5 +1,7 @@
 # Look Only When Needed: Certificate-Guided Visual Routing for Efficient Diffusion VLMs
 
+[Paper (arXiv:2610.36671)](https://arxiv.org/abs/2610.36671) | [Project page](https://hyeon9698.github.io/LOWN/)
+
 **LOWN (Look Only When Needed)** compares text-only predictions with the most recent image-conditioned predictions to decide when to process visual tokens and how many tokens to unmask, without additional training.
 
 ## Run
@@ -55,7 +57,7 @@ Image: “Brown Bear II” by [Derek John Lee](https://www.flickr.com/photos/der
 @article{cho2026lown,
   title   = {Look Only When Needed: Certificate-Guided Visual Routing for Efficient Diffusion VLMs},
   author  = {Cho, Donghyeon and Kim, Joowon and Shin, Seungho and Yang, Eunho},
-  journal = {arXiv preprint},
+  journal = {arXiv preprint arXiv:2610.36671},
   year    = {2026}
 }
 ```
