@@ -28,8 +28,9 @@ Citation:
 - [arXiv abstract](https://arxiv.org/abs/2610.36671): title, authors and abstract
 - [PDF](https://arxiv.org/pdf/2610.36671): full paper
 - [HTML](https://arxiv.org/html/2610.36671): full paper with tables as text
+- [Hugging Face Papers](https://huggingface.co/papers/2610.36671): paper page with a one-minute video
 
 ## Code
 
 - [GitHub: hyeon9698/LOWN](https://github.com/hyeon9698/LOWN): LOWN decoding on LLaDA-V and a demo that compares it with the baseline on one image
-- [Project page](https://hyeon9698.github.io/LOWN/): overview, figures and results
+- [Project page](https://hyeon9698.github.io/LOWN/): overview, a one-minute video with its transcript, figures and results

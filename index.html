@@ -30,6 +30,8 @@
     .result-figure { margin: 0 auto 0.75rem; }
     .author-note { font-size: 0.8rem; color: #777; margin-top: 0.3rem; }
     .nowrap { white-space: nowrap; }
+    .explainer { display: block; width: 100%; height: auto; margin: 0 auto 0.75rem; }
+    .transcript summary { cursor: pointer; font-weight: 600; margin-bottom: 0.5rem; }
     @media screen and (max-width: 768px) {
       .publication-title { font-size: 1.8rem !important; }
       .title-sub { font-size: 1.35rem; }
@@ -85,12 +87,28 @@
                 </a>
               </span>
               <span class="link-block">
+                <a href="#video"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-video"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <span class="link-block">
                 <a href="https://github.com/hyeon9698/LOWN"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
                   <span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://huggingface.co/papers/2610.36671"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">&#129303;</span>
+                  <span>HF Papers</span>
                 </a>
               </span>
             </div>
@@ -111,6 +129,43 @@
         step whether the visual tokens need to be processed at all and otherwise runs a TEXT-ONLY forward.
       </h2>
     </div>
+  </div>
+</section>
+
+<section class="section" id="video">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Video</h2>
+    <video class="explainer" controls playsinline preload="metadata"
+           poster="./static/videos/lown-explainer-poster.jpg"
+           aria-label="One-minute overview of LOWN (Look Only When Needed)">
+      <source src="./static/videos/lown-explainer.mp4" type="video/mp4">
+    </video>
+    <div class="content has-text-centered">
+      <p>
+        A one-minute overview of LOWN (Look Only When Needed), a training-free decoding method for diffusion VLMs
+        that processes the image only when a text-only prediction disagrees with the last image-conditioned prediction.
+      </p>
+    </div>
+    <details class="transcript">
+      <summary>Transcript</summary>
+      <div class="content has-text-justified">
+        <p>
+          Watch a masked diffusion model describe this image. With Look Only When Needed, LOWN for short, it's done
+          in under three seconds. Without it, the diffusion model re-reads the whole image at every step. That takes
+          almost ten seconds.
+        </p>
+        <p>Re-reading is costly: the image is 94% of what the model processes.</p>
+        <p>
+          So LOWN remembers its last look. Each step, it first guesses without the image, at a fraction of the cost.
+          Most confident first, it writes each word the guess agrees on, up to the first mismatch. Next step, the top
+          word, brown, disagrees with the guess, so it looks again. So it looks only when needed: not 48 times, but 12.
+        </p>
+        <p>
+          At the same compute, other speed-ups keep 92&ndash;94%. LOWN keeps 99.6%, with about a third of the compute.
+        </p>
+        <p>LOWN. Look Only When Needed.</p>
+      </div>
+    </details>
   </div>
 </section>
 
