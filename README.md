@@ -1,6 +1,6 @@
 # Look Only When Needed: Certificate-Guided Visual Routing for Efficient Diffusion VLMs
 
-[Paper (arXiv:2610.36671)](https://arxiv.org/abs/2610.36671) | [Project page](https://hyeon9698.github.io/LOWN/)
+[Paper (arXiv:2610.36671)](https://arxiv.org/abs/2610.36671) | [Project page](https://hyeon9698.github.io/LOWN/) | [Video (1 min)](https://hyeon9698.github.io/LOWN/#video) | [🤗 HF Papers](https://huggingface.co/papers/2610.36671)
 
 **LOWN (Look Only When Needed)** compares text-only predictions with the most recent image-conditioned predictions to decide when to process visual tokens and how many tokens to unmask, without additional training.
 
