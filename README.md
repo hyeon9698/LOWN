@@ -7,6 +7,8 @@
 - **2026-10-30**: [#1 Paper of the day](https://huggingface.co/papers/date/2026-10-30) on 🤗 Hugging Face Daily Papers.
 - **2026-10-27**: Paper released on [arXiv](https://arxiv.org/abs/2610.36671).
 
+https://github.com/user-attachments/assets/947c55f1-cf23-46f8-9e4a-3c914347f90a
+
 <p align="center">
   <img src="https://hyeon9698.github.io/LOWN/static/images/teaser.png" width="100%"
        alt="LOWN compared with token pruning, the token budget, and the relative cost and performance on ten benchmarks.">
